@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoviePedia</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="Database.js" defer></script>
+    <div class="header">
+    <a href="#default" class="logo">Moviepedia</a>
+
+    <div class="nav"> 
+    <a class="active" href="#home">Home</a>
+    <a href="Watchlist">Watchlist</a>
+    <a href="#movies">Movies</a>
+    </div>
+     <div class="field">
+          <input id="search" type="search" placeholder="e.g., The Godfather" />
+        </div>
+    </div>
+</head>
+<body>
+  <section id="movies">
+      <p id="results-count" role="status"></p>
+      <ul id="movies-grid" class="cards"></ul>
+    </section>
+ </section>
+  <footer class="site-footer">
+    <p>CSC 3050 * Javon and Elian's project</p>
+  </footer>
+</body>
+</html>
