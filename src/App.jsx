@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Routes, Route, useParams, Link, useNavigate } from 'react-router-dom';
 import MovieCard from './MovieCard.jsx';
 
-// --- 1. Home Page ---
 function Home({ query, setQuery }) {
   const [allMovies, setAllMovies] = useState([]);
   const [status, setStatus] = useState('loading');
@@ -34,7 +33,6 @@ function Home({ query, setQuery }) {
   );
 }
 
-// --- 2. Details Page ---
 function MovieDetails() {
   const { id } = useParams(); 
   const [movie, setMovie] = useState(null);
@@ -62,8 +60,34 @@ function MovieDetails() {
     </div>
   );
 }
+function RandomMovie() {
+  const navigate = useNavigate();
 
-// --- 3. Main App ---
+  const [status, setStatus] = useState('loading');
+
+  useEffect(() => {
+    fetch('/api/Movies')
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to load movies');
+        return res.json();
+      })
+      .then((data) => {
+        if (data.length === 0) throw new Error('No movies available');
+
+        const randomIndex = Math.floor(Math.random() * data.length);
+        const randomMovie = data[randomIndex];
+
+        navigate(`/movies/${randomMovie.id}`, { replace: true });
+      })
+      .catch(() => setStatus('error'));
+  }, [navigate]);
+
+  if (status === 'error') {
+    return <p>Could not find a random movie.</p>;
+  }
+
+  return <p>Finding a random movie...</p>;
+}
 export default function App() {
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
@@ -81,12 +105,11 @@ export default function App() {
       <header className="header">
         <Link to="/" className="logo">Moviepedia</Link>
         
-        <nav className="nav">
+         <nav className="nav">
            <Link to="/">Home</Link>
-          <Link to="/">Movies</Link> 
+           <Link to="/">Movies</Link> 
+           <Link to="/random">Random</Link>
         </nav>
-
-        {/* The Search bar is now global! */}
         <div className="field">
           <input
             type="search"
@@ -101,6 +124,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home query={query} setQuery={setQuery} />} />
           <Route path="/movies/:id" element={<MovieDetails />} />
+          <Route path="/random" element={<RandomMovie />} />
         </Routes>
       </section>
     </>
