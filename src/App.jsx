@@ -82,8 +82,8 @@ export default function App() {
         <Link to="/" className="logo">Moviepedia</Link>
         
         <nav className="nav">
-          <Link to="/">Home</Link>
-          <Link to="/movies">Movies</Link> 
+           <Link to="/">Home</Link>
+          <Link to="/">Movies</Link> 
         </nav>
 
         {/* The Search bar is now global! */}
@@ -100,7 +100,6 @@ export default function App() {
       <section id="movies">
         <Routes>
           <Route path="/" element={<Home query={query} setQuery={setQuery} />} />
-          <Route path="/movies" element={<Home />} />
           <Route path="/movies/:id" element={<MovieDetails />} />
         </Routes>
       </section>
