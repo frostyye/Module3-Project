@@ -1,0 +1,42 @@
+## MoviePedia API contract
+
+Base path: `/api`. Request and response bodies are JSON. Every error has the same shape:
+
+```json
+{ "error": { "code": "NOT_FOUND", "message": "No Movie with id 99" } }
+```
+
+A validation error also lists what failed:
+
+```json
+{ "error": { "code": "VALIDATION_FAILED", "message": "The movie is not valid",
+             "details": ["year must be a positive whole number"] } }
+```
+
+## The resource: a Movie
+
+| Field | Type | Rules |
+|---|---|---|
+| `id` | integer | assigned by the server |
+| `name` | string | required, not blank |
+| `image` | string | required, valid URL format |
+| `genres` | array of strings | required, at least one genre |
+| `year` | integer | 	required, greater than 1888 (invention of film) |
+| `rating` | string | required, formatted as X.X/10 |
+
+## Endpoints
+
+| Method and path | Request body | Success | Errors |
+|---|---|---|---|
+| `GET /api/Movies` | none | `200` and an array of Movies | none |
+| `GET /api/Movies/:id` | none | `200` and the Movie | `404 NOT_FOUND` |
+| `POST /api/Movies` | `{ name, category, minutes }` | `201` and the created Movie, with its `id` | `400 VALIDATION_FAILED`, `400 BAD_JSON` |
+| `PUT /api/Movies/:id` | `{ name, category, minutes }` | `200` and the updated Movie | `400 VALIDATION_FAILED`, `400 BAD_JSON`, `404 NOT_FOUND` |
+| `DELETE /api/Movies/:id` | none | `204` and no body | `404 NOT_FOUND` |
+
+Two rules for the error cases:
+
+- On `PUT`, the body is checked first: an invalid body returns `400 VALIDATION_FAILED` even when no Movie has that id.
+- An id has to be written as a positive whole number, e.g., `3`. Any other id, e.g., `abc`, `3.0`, or `03`, returns `404 NOT_FOUND`, since no Movie has that id.
+
+Any other path under `/api` returns `404 NOT_FOUND`. An unexpected server error returns `500 SERVER_ERROR` with a generic message; details are logged on the server only.

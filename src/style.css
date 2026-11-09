@@ -1,0 +1,129 @@
+
+.header {
+  overflow: hidden;
+  background-color: #52331d;
+  padding: 20px 10px;
+}
+.header a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+.header a.active {
+  background-color: green;
+  color: white;
+}
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+.header div.nav {
+  float: right;
+}
+
+.header .field {
+    float: right;
+    width: 300px;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-top: 4px;
+}
+
+.header .field label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.header .field input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+@media (min-width: 768px) {
+    .movie-controls {
+        flex-direction: row;
+        align-items: end;
+    }
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    align-items: start;
+}
+
+
+.movie-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    min-width: 0;
+}
+.cards :hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+#movies-grid .movie-poster {
+    display: block;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+.movie-info {
+    padding: 12px;
+}
+
+.movie-info h3 {
+    font-size: 18px;
+    margin: 8px 0;
+}
+
+.movie-info p {
+    font-size: 14px;
+    margin: 8px 0;
+}
+
+.movie-actions button {
+    padding: 8px 12px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: green;
+    color: white;
+}
+
+@media (min-width: 768px) {
+    .cards {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1200px) {
+    .cards{
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+}
