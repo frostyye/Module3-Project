@@ -1,3 +1,4 @@
+Check this in the code tab for better viewing:
 Moviepedia is meant to be a kind of a database of movies; it lets users search for movies and click on a movie for more details.
 Some current features:
 Movie browsing: Users on the homepage are shown 10 movies in a grid and it shows poster, title, genre, release year, and the movies rating
